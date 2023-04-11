@@ -89,7 +89,24 @@ go
 -- Beziehungen erstellen
 -----------------------------------------------------------
 
--- alter table Program add foreign key(fk_Id) references Ort(OrtId);
+alter table Program 
+  add foreign key (fk_MissionId) references Mission (MissionId);
+  
+alter table Mission 
+  add foreign key (fk_DestinationId) references Destination (DestinationId),
+      foreign key (fk_LaunchSite) references LaunchSite (LaunchSiteId);
+	  
+alter table Contributed 
+  add foreign key (fk_OrganisationId) references Organisation (OrganisationId),
+      foreign key (fk_MissionId) references Mission (MissionId);
+	  
+alter table Worked 
+  add foreign key (fk_PersonalId) references Personal (PersonalId),
+      foreign key (fk_MissionId) references Mission (MissionId);
+
+alter table Personal 
+  add foreign key (fk_JobId) references Job(JobId),
+      foreign key (fk_Organisation) references Organisation (OrganisationId);
 
 -----------------------------------------------------------
 -- Daten einfuegen
