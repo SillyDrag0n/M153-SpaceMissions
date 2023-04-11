@@ -1,5 +1,5 @@
 # M153-SpaceProgram
 
-SillyDrag0n : Silvan Müller
+SillyDrag0n / SilMueller(Geschäftskonto) : Silvan Müller
 
 MiguTome : Miguel Angelo Tomé
