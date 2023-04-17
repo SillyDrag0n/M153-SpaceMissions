@@ -24,6 +24,7 @@ create table Program (
   ProgramEndDate date NULL,
   ProgramNoOfFlights int,
   primary key (ProgramId),
+  fk_MissionId int,
 );
 go
 
@@ -33,6 +34,8 @@ create table Mission (
   MissionBudget decimal(16,2),
   MissionSucceeded bit NULL, 
   primary key (MissionId),
+  fk_DestinationId int,
+  fk_LaunchSiteId int,
 );
 go
 
@@ -53,6 +56,8 @@ go
 create table Contributed (
   ContributedId int identity,
   primary key (ContributedId),
+  fk_MissionId int,
+  fk_OrganisationId int,
 );
 go
 
@@ -67,6 +72,8 @@ go
 create table Worked (
   WorkedId int identity,
   primary key (WorkedId),
+  fk_PersonalId int,
+  fk_MissionId int,
 );
 go
 
@@ -75,13 +82,15 @@ create table Personal (
   PersonalVorname varchar(20),
   PersonalNachname varchar(20),
   primary key (PersonalId),
+  fk_JobId int,
+  fk_OrganisationId int,
 );
 go
 
 create table Job (
   JobId int identity,
   JobDescription varchar(30),
-  primary key (JobDescription),
+  primary key (JobId),
 );
 go
 
@@ -90,27 +99,27 @@ go
 -----------------------------------------------------------
 
 alter table Program 
-  add constraint fk_MissionId foreign key (MissionId) REFERENCES Mission (MissionId);
+  add constraint fk_MissionIdForProgram foreign key (fk_MissionId) REFERENCES Mission (MissionId);
 go
 
 alter table Mission 
-  add constraint fk_DestinationId foreign key (DestinationId) REFERENCES Destination (DestinationId),
-      constraint fk_LaunchSite foreign key (LaunchSiteId) REFERENCES LaunchSite (LaunchSiteId);
+  add constraint fk_DestinationIdForMission foreign key (fk_DestinationId) REFERENCES Destination (DestinationId),
+      constraint fk_LaunchSiteForMission foreign key (fk_LaunchSiteId) REFERENCES LaunchSite (LaunchSiteId);
 go
 	  
 alter table Contributed 
-  add constraint fk_OrganisationId foreign key (OrganisationId) REFERENCES Organisation (OrganisationId),
-      constraint fk_MissionId foreign key (MissionId) REFERENCES Mission (MissionId);
+  add constraint fk_OrganisationIdForContributed foreign key (fk_OrganisationId) REFERENCES Organisation (OrganisationId),
+      constraint fk_MissionIdForContributed foreign key (fk_MissionId) REFERENCES Mission (MissionId);
 go
 	  
 alter table Worked 
-  add constraint fk_PersonalId foreign key (PersonalId) REFERENCES Personal (PersonalId),
-      constraint fk_MissionId foreign key (MissionId) REFERENCES Mission (MissionId);
+  add constraint fk_PersonalIdForWorked foreign key (fk_PersonalId) REFERENCES Personal (PersonalId),
+      constraint fk_MissionIdForWorked foreign key (fk_MissionId) REFERENCES Mission (MissionId);
 go
 
 alter table Personal 
-  add constraint fk_JobId foreign key (JobId) REFERENCES Job (JobId),
-      constraint fk_Organisation foreign key (OrganisationId) REFERENCES Organisation (OrganisationId);
+  add constraint fk_JobIdForPersonal foreign key (fk_JobId) REFERENCES Job (JobId),
+      constraint fk_OrganisationForPersonal foreign key (fk_OrganisationId) REFERENCES Organisation (OrganisationId);
 go
 
 -----------------------------------------------------------
