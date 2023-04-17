@@ -19,7 +19,7 @@ go
 -----------------------------------------------------------
 create table Program (
   ProgramId int identity,
-  ProgramName varchar(30),
+  ProgramName varchar(50),
   ProgramStartDate date,
   ProgramEndDate date NULL,
   ProgramNoOfFlights int,
@@ -29,7 +29,7 @@ go
 
 create table Mission (
   MissionId int identity,
-  MissionName varchar(30),
+  MissionName varchar(50),
   MissionBudget decimal(16,2),
   MissionSucceeded bit NULL, 
   primary key (MissionId),
@@ -127,9 +127,15 @@ go
 -- Tabelle Program abfuellen
 -----------------------------------------------------------
 
-
---insert into Bike (Bez, Preis) values 
---  ('Travel SL', 1399),     /* Cube, Citybike */
---  ('Upstreet 5', 3899),    /* Flyer, E-Bike */
---  ('Uproc 3', 4599);       /* Flyer, E-Bike */
---go
+insert into Program
+  (ProgramName,                                      ProgramStartDate, ProgramEndDate, ProgramNoOfFlights) values
+  ('Project Mercury',                                '1958-10-07',     '1963-05-15',   26),
+  ('Project Gemini',                                 '1961-02-19',     '1966-11-11',   12),
+  ('Apollo Program',                                 '1961-10-27',     '1975-12-19',   35),
+  ('Vostok programme',                               '1959-01-08',     '1965-06-19',   6),
+  ('Skylab',                                         '1973-05-11',     '1974-02-20',   5),
+  ('Voshkod programme',                              '1964-10-12',     '1965-03-19',   2),
+  ('Space Shuttle Program',                          '1972-01-01',     '2011-01-01',   137),
+  ('International Space Station programme',          '1993-09-03',     NULL,           246),
+  ('China Manned Space Program',                     '1992-09-21',     NULL,           25),
+  ('Mir',                                            '1976-02-17',     '1996-04-23',   39);
