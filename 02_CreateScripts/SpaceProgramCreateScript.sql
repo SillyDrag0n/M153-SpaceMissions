@@ -90,23 +90,28 @@ go
 -----------------------------------------------------------
 
 alter table Program 
-  add foreign key (fk_MissionId) references Mission (MissionId);
-  
+  add constraint fk_MissionId foreign key (MissionId) REFERENCES Mission (MissionId);
+go
+
 alter table Mission 
-  add foreign key (fk_DestinationId) references Destination (DestinationId),
-      foreign key (fk_LaunchSite) references LaunchSite (LaunchSiteId);
+  add constraint fk_DestinationId foreign key (DestinationId) REFERENCES Destination (DestinationId),
+      constraint fk_LaunchSite foreign key (LaunchSiteId) REFERENCES LaunchSite (LaunchSiteId);
+go
 	  
 alter table Contributed 
-  add foreign key (fk_OrganisationId) references Organisation (OrganisationId),
-      foreign key (fk_MissionId) references Mission (MissionId);
+  add constraint fk_OrganisationId foreign key (OrganisationId) REFERENCES Organisation (OrganisationId),
+      constraint fk_MissionId foreign key (MissionId) REFERENCES Mission (MissionId);
+go
 	  
 alter table Worked 
-  add foreign key (fk_PersonalId) references Personal (PersonalId),
-      foreign key (fk_MissionId) references Mission (MissionId);
+  add constraint fk_PersonalId foreign key (PersonalId) REFERENCES Personal (PersonalId),
+      constraint fk_MissionId foreign key (MissionId) REFERENCES Mission (MissionId);
+go
 
 alter table Personal 
-  add foreign key (fk_JobId) references Job(JobId),
-      foreign key (fk_Organisation) references Organisation (OrganisationId);
+  add constraint fk_JobId foreign key (JobId) REFERENCES Job (JobId),
+      constraint fk_Organisation foreign key (OrganisationId) REFERENCES Organisation (OrganisationId);
+go
 
 -----------------------------------------------------------
 -- Daten einfuegen
