@@ -24,7 +24,6 @@ create table Program (
   ProgramEndDate date NULL,
   ProgramNoOfFlights int,
   primary key (ProgramId),
-  fk_MissionId int,
 );
 go
 
@@ -34,6 +33,7 @@ create table Mission (
   MissionBudget decimal(16,2),
   MissionSucceeded bit NULL, 
   primary key (MissionId),
+  fk_ProgramId int,
   fk_DestinationId int,
   fk_LaunchSiteId int,
 );
@@ -98,13 +98,10 @@ go
 -- Beziehungen erstellen
 -----------------------------------------------------------
 
-alter table Program 
-  add constraint fk_MissionIdForProgram foreign key (fk_MissionId) REFERENCES Mission (MissionId);
-go
-
 alter table Mission 
   add constraint fk_DestinationIdForMission foreign key (fk_DestinationId) REFERENCES Destination (DestinationId),
-      constraint fk_LaunchSiteForMission foreign key (fk_LaunchSiteId) REFERENCES LaunchSite (LaunchSiteId);
+      constraint fk_LaunchSiteForMission foreign key (fk_LaunchSiteId) REFERENCES LaunchSite (LaunchSiteId),
+      constraint fk_ProgramIdForMission foreign key (fk_ProgramId) REFERENCES Program (ProgramId);
 go
 	  
 alter table Contributed 
@@ -124,6 +121,10 @@ go
 
 -----------------------------------------------------------
 -- Daten einfuegen
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-- Tabelle Program abfuellen
 -----------------------------------------------------------
 
 
