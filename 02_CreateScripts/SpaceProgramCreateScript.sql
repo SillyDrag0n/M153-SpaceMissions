@@ -79,8 +79,8 @@ go
 
 create table Personal (
   PersonalId int identity,
-  PersonalFirstname varchar(20),
-  PersonalLastname varchar(20),
+  PersonalFirstname varchar(30),
+  PersonalLastname varchar(30),
   primary key (PersonalId),
   fk_JobId int,
   fk_OrganisationId int,
@@ -195,20 +195,43 @@ insert into LaunchSite
 go
 
 insert into Organisation
-  (OrganisationName, OrganisationFoundationDate) values
-  ('National Aeronautics and Space Administration (NASA)'),
-  ('Soviet Union / Russia'),
-  ('European Space Agency (ESA)'),
-  ('Canadian Space Agency (CSA)'),
-  ('Japanese Aerospace Exploration Agency (JAXA)'),
-  ('State Space Corporation (Roscosmos)');
+  (OrganisationName,                                       OrganisationFoundationDate) values
+  ('National Aeronautics and Space Administration (NASA)', ''),
+  ('Russian Federal Space Agency (Roscosmos/RFSA)',        ''),
+  ('European Space Agency (ESA)',                          ''),
+  ('Canadian Space Agency (CSA)',                          ''),
+  ('Japanese Aerospace Exploration Agency (JAXA)',         ''),
+  ('SpaceX',                                               ''),
+  ('China National Space Administration (CNSA)',           ''),  
+  ('Masterspark Space Administration',                     '2001-04-21'),
+  ('Other organisation',                                   '2023-04-18');
 go
 
 insert into Personal
-  (PersonalFirstname,     PersonalLastname, fk_JobIdForPersonal,                                          fk_OrganisationForPersonal) values
-  ('Yuri',                'Gargarin',       (select JobId from Job where JobDescription = 'Astronaut'),   (select OrganisationId from Organisation where Name = 'Soviet Union / Russia')),
-  ('Neil Alden',          'Armstrong',      (select JobId from Job where JobDescription = 'Astronaut'),   (select OrganisationId from Organisation where Name = 'National Aeronautics and Space Administration (NASA)')),
-  ('Sergei Pavlovich',    'Korolev',        (select JobId from Job where JobDescription = 'Manager'),     (select OrganisationId from Organisation where Name = 'Soviet Union / Russia')),
-  ('Michael',             'Collins',        (select JobId from Job where JobDescription = 'Astronaut'),   (select OrganisationId from Organisation where Name = 'National Aeronautics and Space Administration (NASA)')),
-  ('Edwin Eugene',        'Aldrin Jr.',     (select JobId from Job where JobDescription = 'Astronaut'),   (select OrganisationId from Organisation where Name = 'National Aeronautics and Space Administration (NASA)'));
-  --('', '',  (select  from  where  = ''), (select  from  where  = ''));
+  (PersonalFirstname,             PersonalLastname,      fk_JobId,                                                           fk_OrganisationId) values
+  ('Yuri',                        'Gargarin',            (select JobId from Job where JobDescription = 'Astronaut'),         (select OrganisationId from Organisation where OrganisationName = 'Russian Federal Space Agency (Roscosmos/RFSA)')),
+  ('Neil Alden',                  'Armstrong',           (select JobId from Job where JobDescription = 'Astronaut'),         (select OrganisationId from Organisation where OrganisationName = 'National Aeronautics and Space Administration (NASA)')),
+  ('Sergei Pavlovich',            'Korolev',             (select JobId from Job where JobDescription = 'Manager'),           (select OrganisationId from Organisation where OrganisationName = 'Russian Federal Space Agency (Roscosmos/RFSA)')),
+  ('Michael',                     'Collins',             (select JobId from Job where JobDescription = 'Astronaut'),         (select OrganisationId from Organisation where OrganisationName = 'National Aeronautics and Space Administration (NASA)')),
+  ('Edwin Eugene',                'Aldrin Jr.',          (select JobId from Job where JobDescription = 'Astronaut'),         (select OrganisationId from Organisation where OrganisationName = 'National Aeronautics and Space Administration (NASA)')),
+  ('Vladimir Mikhaylovich',       'Komarov',             (select JobId from Job where JobDescription = 'Astronaut'),         (select OrganisationId from Organisation where OrganisationName = 'Russian Federal Space Agency (Roscosmos/RFSA)')),
+  ('Boris',                       'Yegorov',             (select JobId from Job where JobDescription = 'Astronaut'),         (select OrganisationId from Organisation where OrganisationName = 'Russian Federal Space Agency (Roscosmos/RFSA)')),
+  ('Alexei Arkhipovich',          'Leonov',              (select JobId from Job where JobDescription = 'Astronaut'),         (select OrganisationId from Organisation where OrganisationName = 'Russian Federal Space Agency (Roscosmos/RFSA)')),
+  ('Malcolm Scott',               'Carpenter',           (select JobId from Job where JobDescription = 'Astronaut'),         (select OrganisationId from Organisation where OrganisationName = 'National Aeronautics and Space Administration (NASA)')),
+  ('Leroy Gordon',                'Cooper Jr.',          (select JobId from Job where JobDescription = 'Astronaut'),         (select OrganisationId from Organisation where OrganisationName = 'National Aeronautics and Space Administration (NASA)')),
+  ('Miguel Angelo',               'Tomé',                (select JobId from Job where JobDescription = 'Engineer'),          (select OrganisationId from Organisation where OrganisationName = 'Masterspark Space Administration')),
+  ('Virgil Ivan',                 'Grissom',             (select JobId from Job where JobDescription = 'Astronaut'),         (select OrganisationId from Organisation where OrganisationName = 'National Aeronautics and Space Administration (NASA)')),
+  ('Elon',                        'Musk',                (select JobId from Job where JobDescription = 'Manager'),           (select OrganisationId from Organisation where OrganisationName = 'SpaceX')),
+  ('Walter Marty',                'Schirra Jr.',         (select JobId from Job where JobDescription = 'Astronaut'),         (select OrganisationId from Organisation where OrganisationName = 'National Aeronautics and Space Administration (NASA)')),
+  ('Edward',                      'Higgins White II',    (select JobId from Job where JobDescription = 'Astronaut'),         (select OrganisationId from Organisation where OrganisationName = 'National Aeronautics and Space Administration (NASA)')),
+  ('Elliot McKay',                'See Jr.',             (select JobId from Job where JobDescription = 'Astronaut'),         (select OrganisationId from Organisation where OrganisationName = 'National Aeronautics and Space Administration (NASA)')),
+  ('Pavel Ivanovich',             'Belyayev',            (select JobId from Job where JobDescription = 'Astronaut'),         (select OrganisationId from Organisation where OrganisationName = 'Russian Federal Space Agency (Roscosmos/RFSA)')),
+  ('Gherman Stepanovich',         'Titov',               (select JobId from Job where JobDescription = 'Astronaut'),         (select OrganisationId from Organisation where OrganisationName = 'Russian Federal Space Agency (Roscosmos/RFSA)')),
+  ('Walter',                      'White',               (select JobId from Job where JobDescription = 'Scientist'),         (select OrganisationId from Organisation where OrganisationName = 'SpaceX')),
+  ('Rick',                        'Sanchez',             (select JobId from Job where JobDescription = 'Scientist'),         (select OrganisationId from Organisation where OrganisationName = 'Masterspark Space Administration')),
+  ('Rodrigo',                     'Sanchez',             (select JobId from Job where JobDescription = 'Mission Control'),   (select OrganisationId from Organisation where OrganisationName = 'China National Space Administration (CNSA)')),
+  ('Martinez',                    'De Loca',             (select JobId from Job where JobDescription = 'Other job'),         (select OrganisationId from Organisation where OrganisationName = 'Russian Federal Space Agency (Roscosmos/RFSA)')),
+  ('Some Canadian',               'Mapletree',           (select JobId from Job where JobDescription = 'Manager'),           (select OrganisationId from Organisation where OrganisationName = 'Canadian Space Agency (CSA)')),
+  ('Vritz',                       'Stadelmann',          (select JobId from Job where JobDescription = 'Engineer'),          (select OrganisationId from Organisation where OrganisationName = 'European Space Agency (ESA)')),
+  ('Till Leon',                   'Strasser',            (select JobId from Job where JobDescription = 'Other job'),         (select OrganisationId from Organisation where OrganisationName = 'Other organisation'));
+go
