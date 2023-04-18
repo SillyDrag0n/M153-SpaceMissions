@@ -79,8 +79,8 @@ go
 
 create table Personal (
   PersonalId int identity,
-  PersonalVorname varchar(20),
-  PersonalNachname varchar(20),
+  PersonalFirstname varchar(20),
+  PersonalLastname varchar(20),
   primary key (PersonalId),
   fk_JobId int,
   fk_OrganisationId int,
