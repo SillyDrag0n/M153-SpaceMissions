@@ -22,7 +22,7 @@ create table Program (
   ProgramName varchar(50),
   ProgramStartDate date,
   ProgramEndDate date NULL,
-  ProgramBudget decimal(16,2) NULL,
+  ProgramBudget decimal(16,2),
   ProgramNoOfFlights int,
   primary key (ProgramId),
 );
@@ -132,14 +132,14 @@ insert into Program
   ('Project Gemini',                              '1961-02-19',       '1966-11-11',      1300000000.00,                     12),
   ('Project Mercury',                             '1958-10-07',       '1963-05-15',       277000000.00,                     26),
   ('Apollo Program',                              '1961-10-27',       '1975-12-19',     25400000000.00,                     35),
-  ('Vostok programme',                            '1959-01-08',       '1965-06-19',               NULL,                      6),
+  ('Vostok programme',                            '1959-01-08',       '1965-06-19',        89200000.00,                      6),
   ('Skylab',                                      '1973-05-11',       '1974-02-20',      2200000000.00,                      5),
-  ('Voshkod programme',                           '1964-10-12',       '1965-03-19',               NULL,                      2),
+  ('Voshkod programme',                           '1964-10-12',       '1965-03-19',       491000000.00,                      2),
   ('Space Shuttle Program',                       '1972-01-01',       '2011-01-01',    196000000000.00,                    137),
   ('International Space Station programme',       '1993-09-03',               NULL,    150000000000.00,                    246),
   ('Touhou Space Program',                        '2007-03-19',       '2010-08-23',     69420000000.00,                      2),
-  ('China Manned Space Program',                  '1992-09-21',               NULL,               NULL,                     25),
-  ('Mir',                                         '1976-02-17',       '1996-04-23',               NULL,                     39),
+  ('China Manned Space Program',                  '1992-09-21',               NULL,        10200000.00,                     25),
+  ('Mir',                                         '1976-02-17',       '1996-04-23',      4920000000.00,                     39),
   ('Populate Mars',                               '2022-06-12',               NULL,      5300000000.00,                      2);
 go
 
@@ -360,6 +360,12 @@ insert into Mission
     (select DestinationId from Destination where DestinationDescription = 'Mars'), 
     (select LaunchSiteId from LaunchSite where LaunchSiteDescription = 'Kodiak Island'), 
     (select ProgramId from Program where ProgramName = 'Populate Mars')
+  ),
+  ('ISS Orbital Launch', 
+    1,  
+    (select DestinationId from Destination where DestinationDescription = 'LEO (Low Earth Orbit)'), 
+    (select LaunchSiteId from LaunchSite where LaunchSiteDescription = 'Kennedy Space Center'), 
+    (select ProgramId from Program where ProgramName = 'International Space Station programme')
   );
 go
 
@@ -390,5 +396,47 @@ insert into Worked
   ((select MissionId from Mission where MissionName = 'Shenzhou 5'),           (select PersonalId from Personal where PersonalFirstname = 'Vritz' and PersonalLastname = 'Stadelmann')),
   ((select MissionId from Mission where MissionName = 'Mir 6'),                (select PersonalId from Personal where PersonalFirstname = 'Rodrigo' and PersonalLastname = 'Sanchez')),
   ((select MissionId from Mission where MissionName = 'Civilization Mars 1'),  (select PersonalId from Personal where PersonalFirstname = 'Elon' and PersonalLastname = 'Musk')),
-  ((select MissionId from Mission where MissionName = 'Civilization Mars 2'),  (select PersonalId from Personal where PersonalFirstname = 'Leroy Gordon' and PersonalLastname = 'Cooper Jr.'));
+  ((select MissionId from Mission where MissionName = 'Civilization Mars 2'),  (select PersonalId from Personal where PersonalFirstname = 'Leroy Gordon' and PersonalLastname = 'Cooper Jr.')),
+  ((select MissionId from Mission where MissionName = 'ISS Orbital Launch'),   (select PersonalId from Personal where PersonalFirstname = 'Vritz' and PersonalLastname = 'Stadelmann')),
+  ((select MissionId from Mission where MissionName = 'ISS Orbital Launch'),   (select PersonalId from Personal where PersonalFirstname = 'Till Leon' and PersonalLastname = 'Strasser')),
+  ((select MissionId from Mission where MissionName = 'ISS Orbital Launch'),   (select PersonalId from Personal where PersonalFirstname = 'Leroy Gordon' and PersonalLastname = 'Cooper Jr.'));
+  
+go
+
+insert into Contributed
+  (fk_MissionId,                                                               fk_OrganisationId) values
+  ((select MissionId from Mission where MissionName = 'Civilization Mars 1'),  (select OrganisationId from Organisation where OrganisationName = 'SpaceX')),
+  ((select MissionId from Mission where MissionName = 'Civilization Mars 2'),  (select OrganisationId from Organisation where OrganisationName = 'SpaceX')),
+  ((select MissionId from Mission where MissionName = 'Apollo 11'),            (select OrganisationId from Organisation where OrganisationName = 'National Aeronautics and Space Administration (NASA)')),
+  ((select MissionId from Mission where MissionName = 'Apollo 13'),            (select OrganisationId from Organisation where OrganisationName = 'National Aeronautics and Space Administration (NASA)')),
+  ((select MissionId from Mission where MissionName = 'Vostok 1'),             (select OrganisationId from Organisation where OrganisationName = 'Soviet Space Organisation')),
+  ((select MissionId from Mission where MissionName = 'Vostok 2'),             (select OrganisationId from Organisation where OrganisationName = 'Soviet Space Organisation')),
+  ((select MissionId from Mission where MissionName = 'MR-4'),                 (select OrganisationId from Organisation where OrganisationName = 'European Space Agency (ESA)')),
+  ((select MissionId from Mission where MissionName = 'MR-4'),                 (select OrganisationId from Organisation where OrganisationName = 'National Aeronautics and Space Administration (NASA)')),
+  ((select MissionId from Mission where MissionName = 'MR-4'),                 (select OrganisationId from Organisation where OrganisationName = 'Canadian Space Agency (CSA)')),
+  ((select MissionId from Mission where MissionName = 'MR-6'),                 (select OrganisationId from Organisation where OrganisationName = 'National Aeronautics and Space Administration (NASA)')),
+  ((select MissionId from Mission where MissionName = 'MR-6'),                 (select OrganisationId from Organisation where OrganisationName = 'European Space Agency (ESA)')),
+  ((select MissionId from Mission where MissionName = 'Gemini V'),             (select OrganisationId from Organisation where OrganisationName = 'National Aeronautics and Space Administration (NASA)')),
+  ((select MissionId from Mission where MissionName = 'Skylab 1 SL-1'),        (select OrganisationId from Organisation where OrganisationName = 'National Aeronautics and Space Administration (NASA)')),
+  ((select MissionId from Mission where MissionName = 'Skylab 1 SL-1'),        (select OrganisationId from Organisation where OrganisationName = 'Masterspark Space Administration')),
+  ((select MissionId from Mission where MissionName = 'Skylab 3 SL-3'),        (select OrganisationId from Organisation where OrganisationName = 'National Aeronautics and Space Administration (NASA)')),
+  ((select MissionId from Mission where MissionName = 'Skylab 3 SL-3'),        (select OrganisationId from Organisation where OrganisationName = 'Masterspark Space Administration')),
+  ((select MissionId from Mission where MissionName = 'Kosmos 57'),            (select OrganisationId from Organisation where OrganisationName = 'Soviet Space Organisation')),
+  ((select MissionId from Mission where MissionName = 'Voshkod 1'),            (select OrganisationId from Organisation where OrganisationName = 'Soviet Space Organisation')),
+  ((select MissionId from Mission where MissionName = 'STS-51-L'),             (select OrganisationId from Organisation where OrganisationName = 'National Aeronautics and Space Administration (NASA)')),
+  ((select MissionId from Mission where MissionName = 'Luna Nights I'),        (select OrganisationId from Organisation where OrganisationName = 'Masterspark Space Administration')),
+  ((select MissionId from Mission where MissionName = 'Luna Nights I'),        (select OrganisationId from Organisation where OrganisationName = 'SpaceX')),
+  ((select MissionId from Mission where MissionName = 'Luna Nights II'),       (select OrganisationId from Organisation where OrganisationName = 'Masterspark Space Administration')),
+  ((select MissionId from Mission where MissionName = 'Luna Nights III'),      (select OrganisationId from Organisation where OrganisationName = 'Masterspark Space Administration')),
+  ((select MissionId from Mission where MissionName = 'Shenzhou 5'),           (select OrganisationId from Organisation where OrganisationName = 'China National Space Administration (CNSA)')),
+  ((select MissionId from Mission where MissionName = 'Mir 1'),                (select OrganisationId from Organisation where OrganisationName = 'Russian Federal Space Agency (Roscosmos/RFSA)')),
+  ((select MissionId from Mission where MissionName = 'Mir 6'),                (select OrganisationId from Organisation where OrganisationName = 'Russian Federal Space Agency (Roscosmos/RFSA)')),
+  ((select MissionId from Mission where MissionName = 'Civilization Mars 1'),  (select OrganisationId from Organisation where OrganisationName = 'SpaceX')),
+  ((select MissionId from Mission where MissionName = 'Civilization Mars 1'),  (select OrganisationId from Organisation where OrganisationName = 'Masterspark Space Administration')),
+  ((select MissionId from Mission where MissionName = 'Civilization Mars 2'),  (select OrganisationId from Organisation where OrganisationName = 'SpaceX')),
+  ((select MissionId from Mission where MissionName = 'ISS Orbital Launch'),   (select OrganisationId from Organisation where OrganisationName = 'China National Space Administration (CNSA)')),
+  ((select MissionId from Mission where MissionName = 'ISS Orbital Launch'),   (select OrganisationId from Organisation where OrganisationName = 'National Aeronautics and Space Administration (NASA)')),
+  ((select MissionId from Mission where MissionName = 'ISS Orbital Launch'),   (select OrganisationId from Organisation where OrganisationName = 'European Space Agency (ESA)')),
+  ((select MissionId from Mission where MissionName = 'ISS Orbital Launch'),   (select OrganisationId from Organisation where OrganisationName = 'Japanese Aerospace Exploration Agency (JAXA)')),
+  ((select MissionId from Mission where MissionName = 'ISS Orbital Launch'),   (select OrganisationId from Organisation where OrganisationName = 'Other organisation'));
 go
