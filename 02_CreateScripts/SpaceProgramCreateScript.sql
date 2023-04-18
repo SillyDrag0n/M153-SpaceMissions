@@ -148,6 +148,7 @@ insert into Job
   ('Scientist'),
   ('Astronaut'),
   ('Mission Control'),
+  ('Manager'),
   ('Other job');
 go
 
@@ -193,7 +194,21 @@ insert into LaunchSite
   ('Other launch site');
 go
 
---insert into Organisation
---  (OrganisationName, OrganisationFoundationDate) values
---  ('National Aeronautics and Space Administration (NASA)')
---  
+insert into Organisation
+  (OrganisationName, OrganisationFoundationDate) values
+  ('National Aeronautics and Space Administration (NASA)'),
+  ('Soviet Union / Russia'),
+  ('European Space Agency (ESA)'),
+  ('Canadian Space Agency (CSA)'),
+  ('Japanese Aerospace Exploration Agency (JAXA)'),
+  ('State Space Corporation (Roscosmos)');
+go
+
+insert into Personal
+  (PersonalFirstname,     PersonalLastname, fk_JobIdForPersonal,                                          fk_OrganisationForPersonal) values
+  ('Yuri',                'Gargarin',       (select JobId from Job where JobDescription = 'Astronaut'),   (select OrganisationId from Organisation where Name = 'Soviet Union / Russia')),
+  ('Neil Alden',          'Armstrong',      (select JobId from Job where JobDescription = 'Astronaut'),   (select OrganisationId from Organisation where Name = 'National Aeronautics and Space Administration (NASA)')),
+  ('Sergei Pavlovich',    'Korolev',        (select JobId from Job where JobDescription = 'Manager'),     (select OrganisationId from Organisation where Name = 'Soviet Union / Russia')),
+  ('Michael',             'Collins',        (select JobId from Job where JobDescription = 'Astronaut'),   (select OrganisationId from Organisation where Name = 'National Aeronautics and Space Administration (NASA)')),
+  ('Edwin Eugene',        'Aldrin Jr.',     (select JobId from Job where JobDescription = 'Astronaut'),   (select OrganisationId from Organisation where Name = 'National Aeronautics and Space Administration (NASA)'));
+  --('', '',  (select  from  where  = ''), (select  from  where  = ''));
