@@ -128,14 +128,72 @@ go
 -----------------------------------------------------------
 
 insert into Program
-  (ProgramName,                                      ProgramStartDate, ProgramEndDate, ProgramNoOfFlights) values
-  ('Project Mercury',                                '1958-10-07',     '1963-05-15',   26),
-  ('Project Gemini',                                 '1961-02-19',     '1966-11-11',   12),
-  ('Apollo Program',                                 '1961-10-27',     '1975-12-19',   35),
-  ('Vostok programme',                               '1959-01-08',     '1965-06-19',   6),
-  ('Skylab',                                         '1973-05-11',     '1974-02-20',   5),
-  ('Voshkod programme',                              '1964-10-12',     '1965-03-19',   2),
-  ('Space Shuttle Program',                          '1972-01-01',     '2011-01-01',   137),
-  ('International Space Station programme',          '1993-09-03',     NULL,           246),
-  ('China Manned Space Program',                     '1992-09-21',     NULL,           25),
-  ('Mir',                                            '1976-02-17',     '1996-04-23',   39);
+  (ProgramName,                                   ProgramStartDate,   ProgramEndDate,   ProgramNoOfFlights) values
+  ('Project Mercury',                             '1958-10-07',       '1963-05-15',      26),
+  ('Project Gemini',                              '1961-02-19',       '1966-11-11',      12),
+  ('Apollo Program',                              '1961-10-27',       '1975-12-19',      35),
+  ('Vostok programme',                            '1959-01-08',       '1965-06-19',       6),
+  ('Skylab',                                      '1973-05-11',       '1974-02-20',       5),
+  ('Voshkod programme',                           '1964-10-12',       '1965-03-19',       2),
+  ('Space Shuttle Program',                       '1972-01-01',       '2011-01-01',     137),
+  ('International Space Station programme',       '1993-09-03',       NULL,             246),
+  ('Touhou Space Program',                        '2007-03-19',       '2010-08-23',       2),
+  ('China Manned Space Program',                  '1992-09-21',       NULL,              25),
+  ('Mir',                                         '1976-02-17',       '1996-04-23',      39);
+go
+
+insert into Job
+  (JobDescription) values
+  ('Engineer'),
+  ('Scientist'),
+  ('Astronaut'),
+  ('Mission Control'),
+  ('Other job');
+go
+
+insert into Destination
+  (DestinationDescription) values
+  ('Mercury'),
+  ('Venus'),
+  ('Mars'),
+  ('Jupiter'),
+  ('Saturn'),
+  ('Uranus'),
+  ('Neptun'),
+  ('Pluto'),
+  ('Titan'),
+  ('Europa'),
+  ('Venus'),
+  ('Lunar Surface'),
+  ('Lunar Orbit'),
+  ('LEO (Low Earth Orbit)'),
+  ('Spacewalk'),
+  ('Spacecreaft'),
+  ('Edge of Space'),
+  ('Kuiper belt'),
+  ('Meteoroid'),
+  ('Asteorid'),
+  ('Other celestial object'),
+  ('Other destination');
+go
+
+insert into LaunchSite
+  (LaunchSiteDescription) values
+  ('Cape Canaveral Space Force Station'),
+  ('Kennedy Space Center'),
+  ('Baikonur Cosmodrome'),
+  ('Vandenberg Space Force Station'),
+  ('Wallops Island Flight Facility'),
+  ('Kodiak Island'),
+  ('White Sands Missile Range'),
+  ('Jiuqan Satellite Launch Center'),
+  ('Wenchang Space Launch Site'),
+  ('Migus House'),
+  ('Reagan Test Site, Kwajalein Atoll'),
+  ('Other launch site');
+go
+
+--insert into Organisation
+--  (OrganisationName, OrganisationFoundationDate) values
+--  ('National Aeronautics and Space Administration (NASA)')
+--  
