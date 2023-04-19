@@ -1,11 +1,13 @@
 --*********************************************************
--- SpaceProgram
+-- SpacePrograms
 --*********************************************************
 
 ------------------------------------------------------------------
 -- Stored Function 'fn_PersonalWorkedOnMission' erstellen
 -- Searches for all Personal that worked on a selected mission
 ------------------------------------------------------------------
+use SpacePrograms
+go
 
 drop function if exists fn_PersonalWorkedOnMission;
 go

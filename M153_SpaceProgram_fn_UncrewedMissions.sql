@@ -1,11 +1,13 @@
 --*********************************************************
--- SpaceProgram
+-- SpacePrograms
 --*********************************************************
 
 ------------------------------------------------------------------
 -- Stored Function 'fn_UncrewedMissions' erstellen
 -- Searches for all missions without any crew members registered
 ------------------------------------------------------------------
+use SpacePrograms
+go
 
 drop function if exists fn_UncrewedMissions;
 go
