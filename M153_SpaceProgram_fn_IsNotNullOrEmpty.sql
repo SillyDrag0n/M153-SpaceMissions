@@ -8,8 +8,8 @@
 -- returns either a 1 (true) or 0 (false)
 ------------------------------------------------------------------
 
--- drop function if exists fn_IsNotNullOrEmpty;
--- go
+drop function if exists fn_IsNotNullOrEmpty;
+go
 
 create function fn_IsNotNullOrEmpty (@varchar varchar(60)) returns bit as
 begin
@@ -29,9 +29,11 @@ go
 ------------------------------------------------------------------
 
 -- Should return 0 (false)
--- SELECT [dbo].[fn_IsNotNullOrEmpty] ('')
+select [dbo].[fn_IsNotNullOrEmpty] ('')
+go
 -- returns 0
 
 -- Should return 1 (true)
--- SELECT [dbo].[fn_IsNotNullOrEmpty] ('test')
+select [dbo].[fn_IsNotNullOrEmpty] ('test')
+go
 -- returns 1
