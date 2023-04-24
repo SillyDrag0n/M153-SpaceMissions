@@ -11,7 +11,6 @@ go
 
 drop procedure if exists sp_AddSpaceProgram;
 go
-
 create procedure sp_AddSpaceProgram
     @ProgramName varchar(50), 
     @ProgramStartDate date, 
@@ -19,6 +18,9 @@ create procedure sp_AddSpaceProgram
     @ProgramBudget decimal(16,2), 
     @ProgramNoOfFlights int
 as
+	set dateformat YMD;
+	-- yyyy/mm/dd
+
     if (ISNULL(@ProgramName, 0) = 0 or LEN(@ProgramName) > 50)
     begin
         raiserror('Invalid parameter: @ProgramName cannot be NULL or longer than 50', 18, 0)
