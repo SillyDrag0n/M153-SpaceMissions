@@ -24,16 +24,22 @@ as begin
 	set dateformat YMD;
 	-- yyyy/mm/dd
 
-    if (ISNULL(@ProgramName, 0) = 0 or LEN(@ProgramName) > 50)
+    if (ISNULL(@ProgramName, '') = '' or LEN(@ProgramName) > 50)
     begin
         --set raiserror severity level to 16 which indicates user errors.
         raiserror('Invalid parameter: @ProgramName cannot be NULL or longer than 50', 16, 0)
         return
     end
-
-    if (ISDATE(@ProgramStartDate) = 0)
+	
+    if (ISDATE(Cast(@ProgramStartDate as varchar)) = 0)
     begin
         raiserror('Invalid parameter: @ProgramStartDate has the wrong format. Must be yyyy-mm-dd', 16, 0)
+        return
+    end
+
+    if (@ProgramEndDate IS NOT NULL and @ProgramEndDate < @ProgramStartDate and ISDATE(Cast(@ProgramStartDate as varchar)) = 0)
+    begin
+        raiserror('Invalid parameter: @ProgramEndDate Must be a higher date than @ProgramStartDate. Must be yyyy-mm-dd', 16, 0)
         return
     end
 
@@ -63,14 +69,18 @@ as begin
 		);
 	end;
 end;
+go
 ------------------------------------------------------------------
 -- 
 -- Tests for stored procedure 'sp_AddSpaceProgram'
 --
 ------------------------------------------------------------------
-declare @ProgramName_l varchar(50) = 'TestProgram'
-declare @ProgramStartDate_l date = '2004-04-26'
-declare @ProgramBudget_l decimal(16,2) = 10500.00
-declare @ProgramNoOfFlights_l int = 3
+-- declare @ProgramName_l varchar(50) = 'TestProgram'
+-- declare @ProgramStartDate_l date = '2004-04-26'
+-- declare @ProgramBudget_l decimal(16,2) = 10500.00
+-- declare @ProgramNoOfFlights_l int = 3
+-- 
+-- exec sp_AddSpaceProgram @ProgramName_l, @ProgramStartDate_l, @ProgramBudget_l, @ProgramNoOfFlights_l;
 
-exec sp_AddSpaceProgram @ProgramName_l, @ProgramStartDate_l, @ProgramBudget_l, @ProgramNoOfFlights_l;
+execute dbo.sp_AddSpaceProgram 'Test Flight Program', '2023-03-05', NULL, 500.00, 3
+go
