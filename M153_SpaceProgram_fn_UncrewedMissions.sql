@@ -1,5 +1,6 @@
 --*********************************************************
 -- SpacePrograms
+-- TODO SIMU: Add error handling for incorrect parameters
 --*********************************************************
 
 ------------------------------------------------------------------
@@ -23,7 +24,7 @@ create function fn_UncrewedMissions () returns table as
                 from Worked
                 where Mission.MissionId = Worked.fk_MissionId
             );
-
+go
 ------------------------------------------------------------------
 -- 
 -- Tests for stored Function 'fn_UncrewedMissions'
