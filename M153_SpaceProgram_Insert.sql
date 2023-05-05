@@ -2,6 +2,9 @@
 -- SpacePrograms
 --*********************************************************
 
+use SpacePrograms;
+go
+
 -----------------------------------------------------------
 -- Daten einfuegen
 -----------------------------------------------------------
@@ -33,7 +36,7 @@ insert into Program
   ('Dyson Sphere Program',                        '1985-11-23',               NULL,     48050000000.00,                     59),
   ('Project M153',                                '2023-03-15',       '1996-04-23',      4920000000.00,                     39),
   ('Extinction Program',                          '1973-12-14',       '2012-12-31',       752000000.00,                     17),
-  ('Soda Habits Program',                         '2009-01-03',       '2018-02-30',     96500000000.00,                     35),
+  ('Soda Habits Program',                         '2009-01-03',       '2018-02-27',     96500000000.00,                     35),
   ('JoJos Bizzarre Program',                      '1985-06-23',               NULL,    758500000000.00,                    186),
   ('Fruit Parlor Agency',                         '1971-02-02',               NULL,   1758500000000.00,                    270),
   ('Populate Mars',                               '2022-06-12',               NULL,      5300000000.00,                      2);
@@ -449,7 +452,7 @@ go
 -----------------------------------------------------------
 
 insert into Contributed
-  (fk_MissionId,                                                                          fk_OrganisationId) values
+  (fk_MissionId,                                                                                          fk_OrganisationId) values
   ((select MissionId from Mission where MissionName = 'Civilization Mars 1'),                             (select OrganisationId from Organisation where OrganisationName = 'SpaceX')),
   ((select MissionId from Mission where MissionName = 'Civilization Mars 2'),                             (select OrganisationId from Organisation where OrganisationName = 'SpaceX')),
   ((select MissionId from Mission where MissionName = 'Apollo 11'),                                       (select OrganisationId from Organisation where OrganisationName = 'National Aeronautics and Space Administration (NASA)')),
