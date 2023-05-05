@@ -1,7 +1,5 @@
 --****************************************************************
 -- SpacePrograms
--- TODO SIMU: Line 28 - Der Argumentdatentyp date ist für das 1-Argument der isdate-Funktion ungültig.
--- TODO SIMU: Add Tests
 --****************************************************************
 
 ------------------------------------------------------------------
