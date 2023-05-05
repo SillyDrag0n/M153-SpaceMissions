@@ -32,9 +32,9 @@ insert into Program
   ('Europa Highlight Program',                    '2022-05-19',       '2023-04-14',          780000.00,                      1),
   ('Dyson Sphere Program',                        '1985-11-23',               NULL,     48050000000.00,                     59),
   ('Project M153',                                '2023-03-15',       '1996-04-23',      4920000000.00,                     39),
-  ('Mir',                                         '1976-02-17',       '1996-04-23',      4920000000.00,                     39),
-  ('Mir',                                         '1976-02-17',       '1996-04-23',      4920000000.00,                     39),
-  ('Mir',                                         '1976-02-17',       '1996-04-23',      4920000000.00,                     39),
+  ('Extinction Program',                          '1973-12-14',       '2012-12-31',       752000000.00,                     17),
+  ('Soda Habits Program',                         '2009-01-03',       '2018-02-30',     96500000000.00,                     35),
+  ('JoJos Bizzarre Program',                      '1985-06-23',               NULL,    758500000000.00,                    186),
   ('Populate Mars',                               '2022-06-12',               NULL,      5300000000.00,                      2);
 go
 
@@ -50,6 +50,20 @@ insert into Job
   ('Astronaut'),
   ('Mission Control'),
   ('Manager'),
+  ('Marketing'),
+  ('Programmer'),
+  ('Cook'),
+  ('Security'),
+  ('Designer'),
+  ('Manga Artist'),
+  ('Commercial Moderator'),
+  ('Thinker'),
+  ('Researcher'),
+  ('Streamer'),
+  ('Tester'),
+  ('Human Ressources'),
+  ('IT Technician'),
+  ('Support'),
   ('Other job');
 go
 
