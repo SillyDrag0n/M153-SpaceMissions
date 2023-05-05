@@ -353,7 +353,7 @@ insert into Mission
     1,  
     (select DestinationId from Destination where DestinationDescription = 'Europa'), 
     (select LaunchSiteId from LaunchSite where LaunchSiteDescription = 'BOSS Launch Site'), 
-    (select ProgramId from Program where ProgramName = 'Brazilian Air- and Space Force Site')
+    (select ProgramId from Program where ProgramName = 'Project M153')
   ),
   ('Soder Mission IV', 
     1,  
@@ -433,7 +433,7 @@ insert into Worked
   ((select MissionId from Mission where MissionName = 'Soder Mission IV'),                              (select PersonalId from Personal where PersonalFirstname = 'Enrico' and PersonalLastname = 'Pucci')),
   ((select MissionId from Mission where MissionName = 'Orbital Plantation'),                            (select PersonalId from Personal where PersonalFirstname = 'Narciso' and PersonalLastname = 'Anasui')),
   ((select MissionId from Mission where MissionName = 'Orbital Plantation'),                            (select PersonalId from Personal where PersonalFirstname = 'Jobin' and PersonalLastname = 'Higashikata')),
-  ((select MissionId from Mission where MissionName = 'Orbital Plantation'),                            (select PersonalId from Personal where PersonalFirstname = 'Yasuho' and PersonalLastname = 'Yasuho')),
+  ((select MissionId from Mission where MissionName = 'Orbital Plantation'),                            (select PersonalId from Personal where PersonalFirstname = 'Yasuho' and PersonalLastname = 'Hirose')),
   ((select MissionId from Mission where MissionName = 'Over the Edge'),                                 (select PersonalId from Personal where PersonalFirstname = 'Irene' and PersonalLastname = 'Joestar')),
   ((select MissionId from Mission where MissionName = 'Over the Edge'),                                 (select PersonalId from Personal where PersonalFirstname = 'Ritchie' and PersonalLastname = 'Blackmore')),
   ((select MissionId from Mission where MissionName = 'DP Mission I'),                                  (select PersonalId from Personal where PersonalFirstname = 'Funny' and PersonalLastname = 'Valentine')),
