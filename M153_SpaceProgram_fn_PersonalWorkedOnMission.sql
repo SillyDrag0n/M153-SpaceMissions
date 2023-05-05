@@ -13,9 +13,30 @@ go
 drop function if exists fn_PersonalWorkedOnMission;
 go
 
---	if (select * from Worked where Mission.MissionId = Worked.fk_MissionId) != null 
---		return 'This seems to be either an uncrewed mission or an incorrect MissionId. Make sure you have entered the right MissionId and try again';
---	else
+-- create function fn_PersonalWorkedOnMission (@MissionId int) returns table as 
+-- begin
+-- 	if not exists (select * from Worked where Worked.fk_MissionId = @MissionId)
+-- 		begin
+-- 			raiserror('', 16, 0);
+-- 			return
+-- 		end
+-- 	else
+-- 		begin
+-- 			return 
+-- 				select 
+-- 					Mission.MissionId, 
+-- 					Mission.MissionName, 
+-- 					(Personal.PersonalFirstname + ' ' + PersonalLastname ) AS PersonalName, 
+-- 					Job.JobDescription
+-- 					from 
+-- 						Personal 
+-- 						inner join Worked on Personal.PersonalId = Worked.fk_PersonalId
+-- 						inner join Mission on Worked.fk_MissionId = Mission.MissionId
+-- 						inner join Job on Personal.fk_JobId = Job.JobId
+-- 					where 
+-- 						Mission.MissionId = @MissionId;
+-- 		end;
+-- end;
 
 create function fn_PersonalWorkedOnMission (@MissionId int) returns table as 
 	return 
