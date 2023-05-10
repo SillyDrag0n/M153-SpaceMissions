@@ -98,6 +98,11 @@ go
 -- Beziehungen erstellen
 -----------------------------------------------------------
 
+-- Add constraint to only allow a positive value to be added to the Program.ProgramNoOfFlights column
+alter table Program with nocheck add constraint
+  CheckIfProgramNoOfFlightsisPositive check (([ProgramNoOfFlights] >= 0))
+go
+
 alter table Mission 
   add constraint fk_DestinationIdForMission foreign key (fk_DestinationId) REFERENCES Destination (DestinationId),
       constraint fk_LaunchSiteForMission foreign key (fk_LaunchSiteId) REFERENCES LaunchSite (LaunchSiteId),
