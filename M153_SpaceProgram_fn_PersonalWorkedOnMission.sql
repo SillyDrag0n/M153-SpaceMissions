@@ -13,9 +13,30 @@ go
 drop function if exists fn_PersonalWorkedOnMission;
 go
 
+-- create function fn_Umsatzlieferanten()
+-- -- returns @LieferantTable table (LieferantName varchar(100), Umsatz decimal(9,2)) as
+-- returns table
+-- as return 
+-- (
+-- 	select
+-- 		Lieferant.Name, 
+-- 		dbo.fn_UmsatzLieferant(LieferantId) as Umsatz 
+-- 	from Lieferant
+-- );
+-- go
+-- 
+-- use SpacePrograms;
+-- go
+-- select * from dbo.fn_UmsatzLieferanten()
+-- 
+-- declare @LieferantenTab table (Name varchar(100), Umsatz decimal (9,2));
+-- insert into @LieferantenTab select * from dbo.UmsatzLieferanten();
+-- select * from @LieferantenTab;
+
+
 create function fn_PersonalWorkedOnMission (@MissionId int) returns table as
 begin
-	declare @WorkedOnMissionTable table (MissionId int, MissionName varchar(50), PersonalName varchar(50), JobDescription varchar(50));
+	declare @WorkedOnMissionTable = null;
 	
 	if exists (select 1 from Worked	 where Worked.fk_MissionId = @MissionId)
 	begin
@@ -36,6 +57,7 @@ begin
 	return @WorkedOnMissionTable;
 end;
 go;
+
 
 ------------------------------------------------------------------
 -- 
