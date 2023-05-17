@@ -1,6 +1,6 @@
 --*********************************************************
 -- SpacePrograms
--- TODO SIMU: Add error handling for incorrect parameters
+-- TODO SIMU: Add tests for stored procedure
 --*********************************************************
 
 ------------------------------------------------------------------
@@ -33,9 +33,13 @@ as begin
         raiserror('Invalid parameter: We could not match the given ProgramId with an existing Program.', 16, 0)
         return
     end
-    if (@NoOfFlightsToAdd < 0 and (@ProgramNoOfFlights + @NoOfFlightsToAdd < 0))
+    if (@NoOfFlightsToAdd < 0 and ((select Program.ProgramNoOfFlights from Program where Program.ProgramId = @ProgramId) + @NoOfFlightsToAdd < 0))
     begin
         raiserror('Invalid parameter: The Field @ProgramNoOfFlights must be 0 or higher.', 16, 0)
         return
     end
+    
+    update Program 
+        set Program.ProgramNoOfFlights = @NoOfFlightsToAdd 
+        where Program.ProgramId = @ProgramId;
 end;
