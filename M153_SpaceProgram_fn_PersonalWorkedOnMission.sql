@@ -13,51 +13,30 @@ go
 drop function if exists fn_PersonalWorkedOnMission;
 go
 
--- create function fn_Umsatzlieferanten()
--- -- returns @LieferantTable table (LieferantName varchar(100), Umsatz decimal(9,2)) as
--- returns table
--- as return 
--- (
--- 	select
--- 		Lieferant.Name, 
--- 		dbo.fn_UmsatzLieferant(LieferantId) as Umsatz 
--- 	from Lieferant
--- );
--- go
--- 
--- use SpacePrograms;
--- go
--- select * from dbo.fn_UmsatzLieferanten()
--- 
--- declare @LieferantenTab table (Name varchar(100), Umsatz decimal (9,2));
--- insert into @LieferantenTab select * from dbo.UmsatzLieferanten();
--- select * from @LieferantenTab;
-
-
-create function fn_PersonalWorkedOnMission (@MissionId int) returns table as
+create function fn_PersonalWorkedOnMission(@MissionId int) returns @WorkedOnMissionTable table(MissionId int, MissionName varchar(50), PersonalName varchar(100), JobDescription varchar(50)) as
 begin
-	declare @WorkedOnMissionTable = null;
+	declare @TempTable table(MissionId int, MissionName varchar(50), PersonalName varchar(100), JobDescription varchar(50));
 	
 	if exists (select 1 from Worked	 where Worked.fk_MissionId = @MissionId)
 	begin
-		set @WorkedOnMissionTable = (
- 		select 
- 			Mission.MissionId, 
- 			Mission.MissionName, 
- 			(Personal.PersonalFirstname + ' ' + PersonalLastname ) AS PersonalName, 
- 			Job.JobDescription
- 		from 
-	 		Personal 
- 			inner join Worked on Personal.PersonalId = Worked.fk_PersonalId
- 			inner join Mission on Worked.fk_MissionId = Mission.MissionId
- 			inner join Job on Personal.fk_JobId = Job.JobId
- 		where 
-			Mission.MissionId = @MissionId);
+		insert into @TempTable
+ 			select 
+ 				Mission.MissionId, 
+ 				Mission.MissionName, 
+ 				(Personal.PersonalFirstname + ' ' + PersonalLastname ) AS PersonalName, 
+ 				Job.JobDescription
+ 			from 
+	 			Personal 
+ 				inner join Worked on Personal.PersonalId = Worked.fk_PersonalId
+ 				inner join Mission on Worked.fk_MissionId = Mission.MissionId
+ 				inner join Job on Personal.fk_JobId = Job.JobId
+ 			where 
+				Mission.MissionId = @MissionId;
 	end
-	return @WorkedOnMissionTable;
-end;
-go;
-
+	insert into @WorkedOnMissionTable select * from @TempTable
+	return
+end
+go
 
 ------------------------------------------------------------------
 -- 
