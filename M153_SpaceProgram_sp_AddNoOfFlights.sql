@@ -40,6 +40,32 @@ as begin
     end
     
     update Program 
-        set Program.ProgramNoOfFlights = @NoOfFlightsToAdd 
+        set Program.ProgramNoOfFlights += @NoOfFlightsToAdd 
         where Program.ProgramId = @ProgramId;
 end;
+go
+------------------------------------------------------------------
+-- 
+-- Tests for stored procedure 'sp_AddNoOfFlights'
+--
+------------------------------------------------------------------
+
+-- adds the value 'NoOfFlights' of a specific data entry
+
+declare @ProgramId int =        '25'
+declare @NoOfFlightsToAdd int = '4'
+
+exec sp_AddNoOfFlights @ProgramId, @NoOfFlightsToAdd;
+go
+
+------------------------------------------------------------------
+
+-- tries to add a negative number and returns an errormessage
+
+declare @ProgramId int =        '22'
+declare @NoOfFlightsToAdd int = '-5'
+
+exec sp_AddNoOfFlights @ProgramId, @NoOfFlightsToAdd;
+go
+
+------------------------------------------------------------------
