@@ -1,6 +1,5 @@
 --*********************************************************
 -- SpacePrograms
--- TODO SIMU: Add error handling for incorrect parameters
 --*********************************************************
 
 ------------------------------------------------------------------
@@ -55,4 +54,14 @@ go
 -- Mission Id    MissionName    PersonalName    JobDescription
 -- 2	         Apollo 13	    Rick Sanchez	Scientist
 
+------------------------------------------------------------------
+
+-- Should return an empty dataset since there isnt' a mission with the Id 72010:
+
+select * from [dbo].[fn_PersonalWorkedOnMission] ('72010')
+go
+
+-- returns:
+-- Mission Id    MissionName    PersonalName    JobDescription
+-- 
 ------------------------------------------------------------------
