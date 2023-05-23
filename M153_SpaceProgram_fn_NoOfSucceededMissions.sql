@@ -12,12 +12,13 @@ go
 drop function if exists fn_NoOfSucceededMissions;
 go
 
-create function fn_NoOfSucceededMissions(@MissionId int) returns @NoOfSucceededMissions int as
-begin
-	declare @NoOfSucceededMissions int = null;
-	
-	return @NoOfSucceededMissions;
-end
+create function fn_NoOfSucceededMissions(@ProgramId int) returns table as 
+    return
+        select 
+			Count(Mission.MissionSucceeded)
+        from 
+            Mission 
+        where Mission.fk_MissionId = @ProgramId and Mission.MissionSucceeded = 1;
 go
 
 ------------------------------------------------------------------
@@ -26,15 +27,16 @@ go
 --
 ------------------------------------------------------------------
 
--- Should return a set of data similar to this:
--- Mission Id    MissionName    PersonalName    JobDescription
--- 2	         Apollo 13	    Rick Sanchez	Scientist
+-- Should return a set of data if a program with succeeded missions exists:
 
 select * from [dbo].[fn_NoOfSucceededMissions] ('2')
 go
 
--- returns:
--- Mission Id    MissionName    PersonalName    JobDescription
--- 2	         Apollo 13	    Rick Sanchez	Scientist
+------------------------------------------------------------------
+
+-- Should return an empty set of data if there isn't a matching @ProgramId:
+
+select * from [dbo].[fn_NoOfSucceededMissions] ('120294128')
+go
 
 ------------------------------------------------------------------
