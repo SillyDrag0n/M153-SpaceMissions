@@ -81,12 +81,49 @@ go
 -- Test 1: 
 ------------------------------------------------------------------
 
+declare @MissionName_l varchar(50) =    'Stell Ball Run Mission'
+declare @MissionSucceeded_l bit =       1
+declare @Fk_ProgramId_l int =           23
+declare @Fk_DestinationId_l int =       17
+declare @Fk_LaunchSiteId_l int =        12
+
+exec sp_AddMission @MissionName_l, @MissionSucceeded_l, @Fk_ProgramId_l, @Fk_DestinationId_l, @Fk_LaunchSiteId_l;
+go
 
 ------------------------------------------------------------------
--- Test 2: 
+-- Test 2: Returns an errormessage since there isn't a matching ProgramId
 ------------------------------------------------------------------
 
+declare @MissionName_l varchar(50) =    'Stell Ball Run Mission'
+declare @MissionSucceeded_l bit =       NULL
+declare @Fk_ProgramId_l int =           089635
+declare @Fk_DestinationId_l int =       17
+declare @Fk_LaunchSiteId_l int =        12
+
+exec sp_AddMission @MissionName_l, @MissionSucceeded_l, @Fk_ProgramId_l, @Fk_DestinationId_l, @Fk_LaunchSiteId_l;
+go
 
 ------------------------------------------------------------------
--- Test 3: 
+-- Test 3: Returns an errormessage since there isn't a matching DestinationId
 ------------------------------------------------------------------
+
+declare @MissionName_l varchar(50) =    'Stone Ocean Mission'
+declare @MissionSucceeded_l bit =       0
+declare @Fk_ProgramId_l int =           25
+declare @Fk_DestinationId_l int =       4567890
+declare @Fk_LaunchSiteId_l int =        15
+
+exec sp_AddMission @MissionName_l, @MissionSucceeded_l, @Fk_ProgramId_l, @Fk_DestinationId_l, @Fk_LaunchSiteId_l;
+go
+------------------------------------------------------------------
+-- Test 4: Returns an errormessage since there isn't a matching LaunchSiteId
+------------------------------------------------------------------
+
+declare @MissionName_l varchar(50) =    'Jojolands Mission'
+declare @MissionSucceeded_l bit =       NULL
+declare @Fk_ProgramId_l int =           20
+declare @Fk_DestinationId_l int =       7
+declare @Fk_LaunchSiteId_l int =        918128
+
+exec sp_AddMission @MissionName_l, @MissionSucceeded_l, @Fk_ProgramId_l, @Fk_DestinationId_l, @Fk_LaunchSiteId_l;
+go
