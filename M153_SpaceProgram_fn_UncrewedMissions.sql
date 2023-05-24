@@ -1,6 +1,5 @@
 --*********************************************************
 -- SpacePrograms
--- TODO SIMU: Add third test for this function
 --*********************************************************
 
 ------------------------------------------------------------------
@@ -46,17 +45,16 @@ go
 select * from [dbo].[fn_UncrewedMissions] ()
 go
 
-
 --------------------------------------------------------------------------------------------------
 -- Manipulate data for second test
 --------------------------------------------------------------------------------------------------
 insert into Worked
-	(fk_MissionId,                                                                                  fk_PersonalId) values
-	((select MissionId from Mission where MissionName = 'Luna Nights II'),                          (select PersonalId from Personal where PersonalFirstname = 'Edward' and PersonalLastname = 'Higgins White II')),
-	((select MissionId from Mission where MissionName = 'Luna Nights II'),                          (select PersonalId from Personal where PersonalFirstname = 'Martinez' and PersonalLastname = 'De Loca')),
-	((select MissionId from Mission where MissionName = 'Luna Nights II'),                          (select PersonalId from Personal where PersonalFirstname = 'Walter' and PersonalLastname = 'White')),
-	((select MissionId from Mission where MissionName = 'Luna Nights III'),                         (select PersonalId from Personal where PersonalFirstname = 'Amporio' and PersonalLastname = 'Alnino')),
-	((select MissionId from Mission where MissionName = 'Luna Nights III'),                         (select PersonalId from Personal where PersonalFirstname = 'Edward' and PersonalLastname = 'Higgins White II'));
+	(fk_MissionId,                                                                   fk_PersonalId) values
+	((select MissionId from Mission where MissionName = 'Luna Nights II'),           (select PersonalId from Personal where PersonalFirstname = 'Edward' and PersonalLastname = 'Higgins White II')),
+	((select MissionId from Mission where MissionName = 'Luna Nights II'),           (select PersonalId from Personal where PersonalFirstname = 'Martinez' and PersonalLastname = 'De Loca')),
+	((select MissionId from Mission where MissionName = 'Luna Nights II'),           (select PersonalId from Personal where PersonalFirstname = 'Walter' and PersonalLastname = 'White')),
+	((select MissionId from Mission where MissionName = 'Luna Nights III'),          (select PersonalId from Personal where PersonalFirstname = 'Emporio' and PersonalLastname = 'Alninio')),
+	((select MissionId from Mission where MissionName = 'Luna Nights III'),          (select PersonalId from Personal where PersonalFirstname = 'Edward' and PersonalLastname = 'Higgins White II'));
 	
 --------------------------------------------------------------------------------------------------
 -- Test 2: Missions 'Luna Nights II' and 'Luna Nights III' shouldn't appear now
@@ -66,6 +64,28 @@ insert into Worked
 -- 10	         Kosmos 57	     0	                6	          19	          3
 -- 11	         Voshkod 1	     1	                6	          14	          3
 -- 17	         Mir 1	         1	                11 	          16	          3
+--------------------------------------------------------------------------------------------------
+
+select * from [dbo].[fn_UncrewedMissions] ()
+go
+
+--------------------------------------------------------------------------------------------------
+-- Manipulate data for third test
+--------------------------------------------------------------------------------------------------
+
+insert into Worked
+	(fk_MissionId,                                                          fk_PersonalId) values
+	((select MissionId from Mission where MissionName = 'Mir 1'),           (select PersonalId from Personal where PersonalFirstname = 'Enrico' and PersonalLastname = 'Pucci')),
+	((select MissionId from Mission where MissionName = 'Mir 1'),           (select PersonalId from Personal where PersonalFirstname = 'Rodrigo' and PersonalLastname = 'Sanchez')),
+	((select MissionId from Mission where MissionName = 'Mir 1'),           (select PersonalId from Personal where PersonalFirstname = 'Michael' and PersonalLastname = 'Collins'));
+
+--------------------------------------------------------------------------------------------------
+-- Test 3: Mission 'Mir 1'shouldn't appear now
+--
+-- Should return a set of data similar to this:
+-- MissionId     MissionName     MissionSucceeded   fk_ProgramId fk_DestinationId fk_LaunchSite
+-- 10	         Kosmos 57	     0	                6	          19	          3
+-- 11	         Voshkod 1	     1	                6	          14	          3
 --------------------------------------------------------------------------------------------------
 
 select * from [dbo].[fn_UncrewedMissions] ()
