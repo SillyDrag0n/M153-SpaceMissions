@@ -33,7 +33,7 @@ as begin
         raiserror('Invalid parameter: We could not match the given ProgramId with an existing Program.', 16, 0)
         return
     end
-    if (@NoOfFlightsToAdd < 0 and ((select Program.ProgramNoOfFlights from Program where Program.ProgramId = @ProgramId) + @NoOfFlightsToAdd < 0))
+    if (@NoOfFlightsToAdd < 0 or ((select Program.ProgramNoOfFlights from Program where Program.ProgramId = @ProgramId) + @NoOfFlightsToAdd < 0))
     begin
         raiserror('Invalid parameter: The Field @ProgramNoOfFlights must be 0 or higher.', 16, 0)
         return
@@ -44,13 +44,15 @@ as begin
         where Program.ProgramId = @ProgramId;
 end;
 go
-------------------------------------------------------------------
+-----------------------------------------------------------------------
 -- 
 -- Tests for stored procedure 'sp_AddNoOfFlights'
 --
-------------------------------------------------------------------
+-----------------------------------------------------------------------
 
--- adds the value 'NoOfFlights' of a specific data entry
+-----------------------------------------------------------------------
+-- Test 1: adds the value 'NoOfFlights' of a specific data entry
+-----------------------------------------------------------------------
 
 declare @ProgramId int =        '25'
 declare @NoOfFlightsToAdd int = '4'
@@ -58,14 +60,22 @@ declare @NoOfFlightsToAdd int = '4'
 exec sp_AddNoOfFlights @ProgramId, @NoOfFlightsToAdd;
 go
 
-------------------------------------------------------------------
+-----------------------------------------------------------------------
+-- Test 2: tries to add to a non existing Program and returns an errormessage
+-----------------------------------------------------------------------
 
--- tries to add a negative number and returns an errormessage
+declare @ProgramId int =        109129
+declare @NoOfFlightsToAdd int = 9
+
+exec sp_AddNoOfFlights @ProgramId, @NoOfFlightsToAdd;
+go
+
+-----------------------------------------------------------------------
+-- Test 3: tries to add a negative number and returns an errormessage
+-----------------------------------------------------------------------
 
 declare @ProgramId int =        '22'
 declare @NoOfFlightsToAdd int = '-5'
 
 exec sp_AddNoOfFlights @ProgramId, @NoOfFlightsToAdd;
 go
-
-------------------------------------------------------------------
