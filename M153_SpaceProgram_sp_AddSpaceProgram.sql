@@ -83,7 +83,9 @@ go
 --
 ------------------------------------------------------------------
 
--- Inserts a new entry into the Program table 
+------------------------------------------------------------------
+-- Test 1: Inserts a new entry into the Program table 
+------------------------------------------------------------------
 
 declare @ProgramName_l varchar(50) =        'Test Flight Program'
 declare @ProgramStartDate_l date =          '2004-04-26'
@@ -94,7 +96,9 @@ declare @ProgramNoOfFlights_l int =         9
 exec sp_AddSpaceProgram @ProgramName_l, @ProgramStartDate_l, @ProgramEndDate_l, @ProgramBudget_l, @ProgramNoOfFlights_l;
 go
 
--- Inserts a new entry into the Program table 
+------------------------------------------------------------------
+-- Test 2: Inserts a new entry into the Program table 
+------------------------------------------------------------------
 
 declare @ProgramName_l varchar(50) =        'Moon Crater Program'
 declare @ProgramStartDate_l date =          '2017-08-02'
@@ -105,7 +109,9 @@ declare @ProgramNoOfFlights_l int =         2
 exec sp_AddSpaceProgram @ProgramName_l, @ProgramStartDate_l, @ProgramEndDate_l, @ProgramBudget_l, @ProgramNoOfFlights_l;
 go
 
--- Returns an error because @ProgramStartDate_l can not be greater than @ProgramEndDate_l
+------------------------------------------------------------------
+-- Test 3: Returns an error because @ProgramStartDate_l can not be greater than @ProgramEndDate_l
+------------------------------------------------------------------
 
 declare @ProgramName_l varchar(50) =        'The Faulty Program'
 declare @ProgramStartDate_l date =          '2023-05-05'
