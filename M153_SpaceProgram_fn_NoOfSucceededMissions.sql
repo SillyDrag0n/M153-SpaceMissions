@@ -15,10 +15,10 @@ go
 create function fn_NoOfSucceededMissions(@ProgramId int) returns table as 
     return
         select 
-			Count(Mission.MissionSucceeded)
+			Count(Mission.MissionSucceeded) as 'No of Succeeded Missions'
         from 
             Mission 
-        where Mission.fk_MissionId = @ProgramId and Mission.MissionSucceeded = 1;
+        where Mission.fk_ProgramId = @ProgramId and Mission.MissionSucceeded = 1;
 go
 
 ------------------------------------------------------------------
@@ -37,6 +37,13 @@ go
 -- Should return an empty set of data if there isn't a matching @ProgramId:
 
 select * from [dbo].[fn_NoOfSucceededMissions] ('120294128')
+go
+
+------------------------------------------------------------------
+
+-- Should return a set of data if a program with succeeded missions exists:
+
+select * from [dbo].[fn_NoOfSucceededMissions] ('3')
 go
 
 ------------------------------------------------------------------
