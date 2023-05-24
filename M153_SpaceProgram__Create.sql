@@ -18,7 +18,7 @@ go
 -- Tabllen erstellen
 -----------------------------------------------------------
 create table Program (
-  ProgramId int identity,
+  ProgramId int identity(1,1),
   ProgramName varchar(50),
   ProgramStartDate date,
   ProgramEndDate date NULL,
@@ -29,7 +29,7 @@ create table Program (
 go
 
 create table Mission (
-  MissionId int identity,
+  MissionId int identity(1,1),
   MissionName varchar(50),
   MissionSucceeded bit NULL, 
   primary key (MissionId),
@@ -40,21 +40,21 @@ create table Mission (
 go
 
 create table Destination (
-  DestinationId int identity,
+  DestinationId int identity(1,1),
   DestinationDescription varchar(50),
   primary key (DestinationId),
 );
 go
 
 create table LaunchSite (
-  LaunchSiteId int identity,
+  LaunchSiteId int identity(1,1),
   LaunchSiteDescription varchar(50),
   primary key (LaunchSiteId),
 );
 go
 
 create table Contributed (
-  ContributedId int identity,
+  ContributedId int identity(1,1),
   primary key (ContributedId),
   fk_MissionId int,
   fk_OrganisationId int,
@@ -62,7 +62,7 @@ create table Contributed (
 go
 
 create table Organisation (
-  OrganisationId int identity,
+  OrganisationId int identity(1,1),
   OrganisationName varchar(60),
   OrganisationFoundationDate date,
   primary key (OrganisationId),
@@ -70,7 +70,7 @@ create table Organisation (
 go
 
 create table Worked (
-  WorkedId int identity,
+  WorkedId int identity(1,1),
   primary key (WorkedId),
   fk_PersonalId int,
   fk_MissionId int,
@@ -78,7 +78,7 @@ create table Worked (
 go
 
 create table Personal (
-  PersonalId int identity,
+  PersonalId int identity(1,1),
   PersonalFirstname varchar(30),
   PersonalLastname varchar(30),
   primary key (PersonalId),
@@ -88,7 +88,7 @@ create table Personal (
 go
 
 create table Job (
-  JobId int identity,
+  JobId int identity(1,1),
   JobDescription varchar(30),
   primary key (JobId),
 );
