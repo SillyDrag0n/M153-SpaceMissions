@@ -43,16 +43,10 @@ go
 --
 ------------------------------------------------------------------
 
--- Should return a set of data similar to this:
--- Mission Id    MissionName    PersonalName    JobDescription
--- 2	         Apollo 13	    Rick Sanchez	Scientist
+-- Should return a set of data with one entry:
 
 select * from [dbo].[fn_PersonalWorkedOnMission] ('2')
 go
-
--- returns:
--- Mission Id    MissionName    PersonalName    JobDescription
--- 2	         Apollo 13	    Rick Sanchez	Scientist
 
 ------------------------------------------------------------------
 
@@ -60,8 +54,12 @@ go
 
 select * from [dbo].[fn_PersonalWorkedOnMission] ('72010')
 go
+ 
+------------------------------------------------------------------
 
--- returns:
--- Mission Id    MissionName    PersonalName    JobDescription
--- 
+-- Should return a set of data with three entries:
+
+select * from [dbo].[fn_PersonalWorkedOnMission] (25)
+go
+
 ------------------------------------------------------------------
