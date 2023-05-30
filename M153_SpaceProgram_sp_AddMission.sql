@@ -94,7 +94,7 @@ go
 -- Test 2: Returns an errormessage since there isn't a matching ProgramId
 ------------------------------------------------------------------
 
-declare @MissionName_l varchar(50) =    'Stell Ball Run Mission'
+declare @MissionName_l varchar(50) =    'Jojolion'
 declare @MissionSucceeded_l bit =       NULL
 declare @Fk_ProgramId_l int =           089635
 declare @Fk_DestinationId_l int =       17
