@@ -79,15 +79,37 @@ go
 ------------------------------------------------------------------
 
 ------------------------------------------------------------------
--- Test 1: 
+-- Test 1: Inserts a new entry into the Personal table 
 ------------------------------------------------------------------
 
+declare @PersonalFirstname_l varchar(30) =      'Jodio'
+declare @PersonalLastname_l varchar(30) =       'Joestar'
+declare @Fk_JobId_l int =                       8
+declare @Fk_OrganisationId_l int =              15
+
+exec sp_AddSpaceProgram @PersonalFirstname_l, @PersonalLastname_l, @Fk_JobId_l, @Fk_OrganisationId_l;
+go
 
 ------------------------------------------------------------------
--- Test 2:  
+-- Test 2: Returns an errormessage since there isn't a matching JobId
 ------------------------------------------------------------------
 
+declare @PersonalFirstname_l varchar(30) =      'Gyro'
+declare @PersonalLastname_l varchar(30) =       'Zeppeli'
+declare @Fk_JobId_l int =                       252
+declare @Fk_OrganisationId_l int =              17
+
+exec sp_AddSpaceProgram @PersonalFirstname_l, @PersonalLastname_l, @Fk_JobId_l, @Fk_OrganisationId_l;
+go
 
 ------------------------------------------------------------------
--- Test 3: 
+-- Test 3: Returns an errormessage since there isn't a matching OrganisationId
 ------------------------------------------------------------------
+
+declare @PersonalFirstname_l varchar(30) =      'Bruno'
+declare @PersonalLastname_l varchar(30) =       'Bucellati'
+declare @Fk_JobId_l int =                       10
+declare @Fk_OrganisationId_l int =              718
+
+exec sp_AddSpaceProgram @PersonalFirstname_l, @PersonalLastname_l, @Fk_JobId_l, @Fk_OrganisationId_l;
+go
