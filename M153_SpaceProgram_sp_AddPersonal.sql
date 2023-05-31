@@ -9,10 +9,10 @@
 use SpacePrograms
 go
 
-drop procedure if exists sp_AddSpaceProgram;
+drop procedure if exists sp_AddPersonal;
 go
 
-create procedure sp_AddSpaceProgram
+create procedure sp_AddPersonal
     @PersonalFirstname varchar(30), 
     @PersonalLastname varchar(30), 
     @Fk_JobId int, 
@@ -87,7 +87,7 @@ declare @PersonalLastname_l varchar(30) =       'Joestar'
 declare @Fk_JobId_l int =                       8
 declare @Fk_OrganisationId_l int =              15
 
-exec sp_AddSpaceProgram @PersonalFirstname_l, @PersonalLastname_l, @Fk_JobId_l, @Fk_OrganisationId_l;
+exec sp_AddPersonal @PersonalFirstname_l, @PersonalLastname_l, @Fk_JobId_l, @Fk_OrganisationId_l;
 go
 
 ------------------------------------------------------------------
@@ -99,7 +99,7 @@ declare @PersonalLastname_l varchar(30) =       'Zeppeli'
 declare @Fk_JobId_l int =                       252
 declare @Fk_OrganisationId_l int =              17
 
-exec sp_AddSpaceProgram @PersonalFirstname_l, @PersonalLastname_l, @Fk_JobId_l, @Fk_OrganisationId_l;
+exec sp_AddPersonal @PersonalFirstname_l, @PersonalLastname_l, @Fk_JobId_l, @Fk_OrganisationId_l;
 go
 
 ------------------------------------------------------------------
@@ -111,5 +111,5 @@ declare @PersonalLastname_l varchar(30) =       'Bucellati'
 declare @Fk_JobId_l int =                       10
 declare @Fk_OrganisationId_l int =              718
 
-exec sp_AddSpaceProgram @PersonalFirstname_l, @PersonalLastname_l, @Fk_JobId_l, @Fk_OrganisationId_l;
+exec sp_AddPersonal @PersonalFirstname_l, @PersonalLastname_l, @Fk_JobId_l, @Fk_OrganisationId_l;
 go
